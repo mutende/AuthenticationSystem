@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/MDB/css/bootstrap.min.css' %}" type="text/css" >
+    <!-- Material Design Bootstrap - type=""-->
+    <link href="{% static 'bootstrap/MDB/css/mdb.min.css' %}" type= "text/css" rel="stylesheet">
+    <!--  font awesome cdn-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- local css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>login system</title>
+  </head> 
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!-- url as named in the view (url pattern)-->
+    <a class="navbar-brand" href="{% url 'home' %}">
+          Just Code in .py
+    </a>
+   
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+         <li class="nav-item">
+          <a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile</a>
+        </li>
+         </li>
+         <li class="nav-item">
+          <a class="nav-link" href="{% url 'change_password' %}">Change Password</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% else %}
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}">Register</a>
+        </li>
+        {% endif %}
+      </ul>
+     
+    </div>
+  </nav>
+
+    <div class="container">
+      {% if messages%}
+        {% for message in messages %}
+          <div class="alert alert-warning alert-dismissable" role="alert">
+            <button class="close" data-dismiss="alert">
+              <small><sup>x</sup></small>
+            </button>
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif%}
+
+    {% block content %}
+
+       
+
+    {% endblock %}
+
+    </div>
+    
+    <script type="text/javascript" src="{% static 'bootstrap/MDB/js/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/MDB/js/popper.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'bootstrap/MDB/js/bootstrap.min.js' %}"></script>
+</body>   
